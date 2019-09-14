@@ -12,10 +12,12 @@ import AVFoundation
 class ViewController : UIViewController {
     @IBOutlet weak var StationName: UITextField!
     @IBAction func Record(_ sender: Any) {
+        
     }
     
     
     override func viewDidLoad(){
+        SpeechRecorder()
     
     }
 }

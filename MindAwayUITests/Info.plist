@@ -18,5 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Access to record Live</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Access to use Speech</string>
 </dict>
 </plist>

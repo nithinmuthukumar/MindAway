@@ -38,7 +38,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="RecordButton" destination="4u0-Rh-Sfm" id="zfh-5N-Vgb"/>
                         <outlet property="StationName" destination="kmj-Cq-Gut" id="ufb-x5-8Gi"/>
                     </connections>
                 </viewController>
