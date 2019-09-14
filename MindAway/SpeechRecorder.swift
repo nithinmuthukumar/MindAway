@@ -11,79 +11,48 @@ import GLKit
 import AVFoundation
 import Speech
 
-class LiveTranscribeViewController: UIViewController {
-    let audioEngine = AVAudioEngine()
-    let speechRecognizer = SFSpeechRecognizer()
-    let request = SFSpeechAudioBufferRecognitionRequest()
-    var recognitionTask: SFSpeechRecognitionTask?
-    var mostRecentlyProcessedSegmentDuration: TimeInterval = 0
+class SpeechRecorder: UIViewController,SFSpeechRecognizerDelegate {
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     
-    var transcriptionOutputLabel: String!
+    @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var textView: UITextView!
     
+    @IBAction func micTapped(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        SFSpeechRecognizer.requestAuthorization {
-            [unowned self] (authStatus) in
-            switch authStatus {
+        micButton.isEnabled = false  //2
+        
+        speechRecognizer?.delegate = self  //3
+        
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in  //4
+            
+            var isButtonEnabled = false
+            
+            switch authStatus {  //5
             case .authorized:
-                do {
-                    try self.startRecording()
-                } catch let error {
-                    print("There was a problem starting recording: \(error.localizedDescription)")
-                }
+                isButtonEnabled = true
+                
             case .denied:
-                print("Speech recognition authorization denied")
+                isButtonEnabled = false
+                print("User denied access to speech recognition")
+                
             case .restricted:
-                print("Not available on this device")
+                isButtonEnabled = false
+                print("Speech recognition restricted on this device")
+                
             case .notDetermined:
-                print("Not determined")
+                isButtonEnabled = false
+                print("Speech recognition not yet authorized")
+            }
+            
+            OperationQueue.main.addOperation() {
+                self.micButton.isEnabled = isButtonEnabled
             }
         }
     }
 }
-
-extension LiveTranscribeViewController {
-    fileprivate func startRecording() throws {
-        mostRecentlyProcessedSegmentDuration = 0
-        
-        self.transcriptionOutputLabel = ""
-        // 1
-        let node = audioEngine.inputNode
-        let recordingFormat = node.outputFormat(forBus: 0)
-        
-        // 2
-        node.installTap(onBus: 0, bufferSize: 1024,
-                        format: recordingFormat) { [unowned self]
-                            (buffer, _) in
-                            self.request.append(buffer)
-        }
-        
-        // 3
-        audioEngine.prepare()
-        try audioEngine.start()
-        recognitionTask = speechRecognizer?.recognitionTask(with: request) {
-            [unowned self]
-            (result, _) in
-            if let transcription = result?.bestTranscription {
-                self.updateUIWithTranscription(transcription)
-            }
-        }
-    }
-    
-    fileprivate func stopRecording() {
-        audioEngine.stop()
-        request.endAudio()
-        recognitionTask?.cancel()
-    }
-    fileprivate func updateUIWithTranscription(_ transcription: SFTranscription) {
-        self.transcriptionOutputLabel = transcription.formattedString
-        
-        // 2
-        if let lastSegment = transcription.segments.last,
-            lastSegment.duration > mostRecentlyProcessedSegmentDuration {
-            mostRecentlyProcessedSegmentDuration = lastSegment.duration
-        }
-    }
-}
-
 
