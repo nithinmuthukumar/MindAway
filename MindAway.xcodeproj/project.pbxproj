@@ -14,6 +14,7 @@
 		8D4DDE76232CB0E600896B07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D4DDE74232CB0E600896B07 /* LaunchScreen.storyboard */; };
 		8D4DDE81232CB0E600896B07 /* MindAwayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DDE80232CB0E600896B07 /* MindAwayTests.swift */; };
 		8D4DDE8C232CB0E600896B07 /* MindAwayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DDE8B232CB0E600896B07 /* MindAwayUITests.swift */; };
+		8D4DDE9A232CB7FF00896B07 /* SpeechRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DDE99232CB7FF00896B07 /* SpeechRecordController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		8D4DDE87232CB0E600896B07 /* MindAwayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindAwayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4DDE8B232CB0E600896B07 /* MindAwayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindAwayUITests.swift; sourceTree = "<group>"; };
 		8D4DDE8D232CB0E600896B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D4DDE99232CB7FF00896B07 /* SpeechRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecordController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				8D4DDE6B232CB0E400896B07 /* AppDelegate.swift */,
 				8D4DDE6D232CB0E400896B07 /* ViewController.swift */,
+				8D4DDE99232CB7FF00896B07 /* SpeechRecordController.swift */,
 				8D4DDE6F232CB0E400896B07 /* Main.storyboard */,
 				8D4DDE72232CB0E600896B07 /* Assets.xcassets */,
 				8D4DDE74232CB0E600896B07 /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D4DDE6E232CB0E400896B07 /* ViewController.swift in Sources */,
+				8D4DDE9A232CB7FF00896B07 /* SpeechRecordController.swift in Sources */,
 				8D4DDE6C232CB0E400896B07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
